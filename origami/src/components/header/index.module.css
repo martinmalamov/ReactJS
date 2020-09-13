@@ -8,3 +8,8 @@
     border-bottom: 2px solid blue;
     border-top: 2px solid orange;
 }
+
+.logo {
+    width: 60px;
+    margin: 20px;
+}
