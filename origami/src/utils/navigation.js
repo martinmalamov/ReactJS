@@ -23,6 +23,7 @@ const getNavigation = (userid) => {
             link: "/login"
         },
     ]
+    return links
 }
 
 
