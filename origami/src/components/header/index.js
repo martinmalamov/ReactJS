@@ -12,7 +12,12 @@ const Header = () => {
             {
                 links.map(navElement => {
                     return (
-                        <Link href={navElement.link} title={navElement.title} type="header" />
+                        //navElement is the key (don't forget the key !!!)
+                        <Link
+                            key={navElement.title}
+                            href={navElement.link}
+                            title={navElement.title}
+                            type="header" />
                     )
                 })
             }
