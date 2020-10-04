@@ -12,9 +12,9 @@ class Origamis extends Component {
     }
 
     getOrigamis = async () => {
-        // const {length} = this.props
-        // ?length=${length}
-        const promise = await fetch(`http://localhost:9999/api/origami`)
+        const {length} = this.props
+        
+        const promise = await fetch(`http://localhost:9999/api/origami?length=${length}`)
         const origamis = await promise.json()
 
         this.setState({
@@ -22,15 +22,15 @@ class Origamis extends Component {
         })
     }
 
-    // renderOrigamis() {
-    //     const { origamis } = this.state
+    renderOrigamis() {
+        const { origamis } = this.state
 
-    //     return origamis.map((origam, index) => {
-    //         return (
-    //             <Origam key={origam._id} index={index} {...origam} />
-    //         )
-    //     })
-    // }
+        return origamis.map((origam, index) => {
+            return (
+                <Origam key={origam._id} index={index} {...origam} />
+            )
+        })
+    }
 
     componentDidMount() {
         this.getOrigamis()
@@ -38,29 +38,29 @@ class Origamis extends Component {
 
     render() {
 
-        const {
-            origamis
-        } = this.state
-        return (
-            <div className={styles.container}>
-                <h1 className={styles.title}>Origamis</h1>
-                <div>
-                    {origamis.map(origam => {
-                        return (
-                            <div>
-                                {origam.description}
-                            </div>
-                        )
-                    })}
-                </div>
-            </div>
-        )
-
+        // const {
+        //     origamis
+        // } = this.state
         // return (
-        //     <div className={styles["origamis-wrapper"]}>
-        //         {this.renderOrigamis()}
+        //     <div className={styles.container}>
+        //         <h1 className={styles.title}>Origamis</h1>
+        //         <div>
+        //             {origamis.map(origam => {
+        //                 return (
+        //                     <div>
+        //                         {origam.description}
+        //                     </div>
+        //                 )
+        //             })}
+        //         </div>
         //     </div>
         // )
+
+        return (
+            <div className={styles["origamis-wrapper"]}>
+                {this.renderOrigamis()}
+            </div>
+        )
     }
 }
 
