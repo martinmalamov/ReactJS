@@ -1,5 +1,7 @@
 import React from 'react'
-import styles from './index.module.css'
+// import styles from './index.module.css'
+//styled components
+import styled from 'styled-components'
 import PageLayout from '../../components/page-layout/index.js'
 import Title from '../../components/title/index.js'
 import Origamis from '../../components/origamis'
@@ -9,17 +11,26 @@ const ShareThoughtsPage = () => {
   return (
     <PageLayout>
       <Title title="Share your thoughts..." />
-      <div className={styles.container}>
+      <Container>
         <div>
-          <textarea className={styles.textarea}>Publication...</textarea>
+          <TextArea defaultValue="Publication..." />
         </div>
         <div>
           <SubmitButton title="Post" />
         </div>
-      </div>
-      <Origamis length={3}/>
+      </Container>
+      <Origamis length={3} />
     </PageLayout>
   );
 }
+
+const Container = styled.div`
+  text-align: center;
+`
+const TextArea = styled.textarea`
+    width: 300px;
+    height: 100px;
+    resize: none;
+`
 
 export default ShareThoughtsPage
