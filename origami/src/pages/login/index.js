@@ -4,18 +4,23 @@ import SubmitButton from '../../components/button/submit-button'
 import Title from '../../components/title'
 import PageLayout from '../../components/page-layout'
 import Input from '../../components/input'
+import authenticate from '../../utils/authenticate'
+import UserContext from '../../Context'
+// import axios from 'axios'
 
 class LoginPage extends Component {
     constructor(props) {
         super(props)
 
         this.state = {
-            email: "",
+            username: "",
             password: "",
         }
     }
 
-    onChange = (event , type ) => {
+    static contextType = UserContext
+
+    handleChange = (event, type) => {
         const newState = {}
         // console.log(event)
         newState[type] = event.target.value
@@ -23,30 +28,55 @@ class LoginPage extends Component {
         this.setState(newState)
     }
 
+    handleSubmit = async (event) => {
+        event.preventDefault()
+        const {
+            username,
+            password
+        } = this.state
+
+        //fetch
+        await authenticate('http://localhost:9999/api/user/login', {
+            username,
+            password,
+        },
+            (user) => {
+                this.context.logIn(user)
+                this.props.history.push('/')
+            },
+            (e) => {
+                console.log('Failure', e)
+
+            }
+
+        )
+    }
+
     render() {
         const {
-            email,
+            username,
             password,
         } = this.state
 
         return (
             <PageLayout>
-                <div className={styles.container}>
+                <form className={styles.container} onSubmit={this.handleSubmit}>
                     <Title title="Login" />
                     <Input
-                        value={email}
-                        onChange={(e) => this.onChange(e , 'email')}
-                        label="Email"
-                        id="email"
+                        value={username}
+                        onChange={(e) => this.handleChange(e, 'username')}
+                        label="Username"
+                        id="username"
                     />
                     <Input
+                        type="password"
                         value={password}
-                        onChange={(e) => this.onChange(e , 'password')}
+                        onChange={(e) => this.handleChange(e, 'password')}
                         label="Password"
                         id="password"
                     />
                     <SubmitButton title="Login" />
-                </div>
+                </form>
             </PageLayout>
         )
     }

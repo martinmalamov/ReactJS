@@ -1,12 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import App from './App';
 import './index.css';
-// import App from './app.js';
 import Navigation from './navigation';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Navigation />
+    <App>
+      <Navigation />
+    </App>
   </React.StrictMode>,
   document.getElementById('root')
 );
